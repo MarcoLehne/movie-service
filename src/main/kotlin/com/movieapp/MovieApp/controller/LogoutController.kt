@@ -24,5 +24,4 @@ class LogoutController(private val service: UserStateService) {
             ResponseEntity.ok(mapOf("message" to "userIsLoggedOut"))
         } else ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
     }
-
 }
