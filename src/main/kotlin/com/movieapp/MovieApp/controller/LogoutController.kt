@@ -1,6 +1,5 @@
 package com.movieapp.MovieApp.controller
 
-import com.movieapp.MovieApp.model.UserLogoutRequest
 import com.movieapp.MovieApp.model.UserToken
 import com.movieapp.MovieApp.service.UserStateService
 import org.springframework.http.HttpStatus
