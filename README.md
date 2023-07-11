@@ -32,7 +32,7 @@ This is a Kotlin back-end movie app that provides JSON responses. It consists of
 
 ### Getting Started
 
-1. Clone the repository: `git clone https://github.com/MarcoLehne/movie-app.git`
+1. Clone the repository: `git clone https://github.com/MarcoLehne/movie-service.git`
 2. Install dependencies: `gradle build`
 3. Run the application: `gradle bootRun`
 4. Access the application at [http://localhost:8080](http://localhost:8080)
