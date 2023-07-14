@@ -17,8 +17,20 @@ class MockUserDataSource : UserDataSource{
         User(
             "fluffypuff69",
             "wwuwu999",
-            ratedMovies = mutableListOf(),
-            favoriteMovies = mutableListOf()
+            ratedMovies = mutableListOf(Movie(
+                "Harry Potter and the Philosopher's Stone",
+                "11-22-2001",
+                "Chris Columbus",
+                5.0,
+                1
+            ),),
+            favoriteMovies = mutableListOf(Movie(
+                "Harry Potter and the Philosopher's Stone",
+                "11-22-2001",
+                "Chris Columbus",
+                5.0,
+                1
+            ),)
         ),
         User(
             "twistingShadow1",
@@ -42,7 +54,6 @@ class MockUserDataSource : UserDataSource{
     }
 
     override fun deleteUser(userDeleteRequest: UserDeleteRequest): User? {
-
         val userToBeRemoved =
             users.find {
                            it.userName == userDeleteRequest.userName &&
@@ -54,4 +65,21 @@ class MockUserDataSource : UserDataSource{
         return userToBeRemoved
     }
 
+    override fun updateUser(userUpdateRequest: UserUpdateRequest) {
+        val userToUpdate = users.find { it.userName == userUpdateRequest.userToken.userName }!!
+        val updateFavoriteOrRatedMovies = userUpdateRequest.updateFavoriteMoviesOrRatedMovies
+        val movie = userUpdateRequest.movie
+        val addOrDelete = userUpdateRequest.addOrDelete
+
+        if ( addOrDelete == "add") {
+            if (updateFavoriteOrRatedMovies == "favoriteMovies") userToUpdate.favoriteMovies.add(movie)
+            else userToUpdate.ratedMovies.add(movie)
+        } else {
+            if (updateFavoriteOrRatedMovies == "favoriteMovies") userToUpdate.favoriteMovies.removeIf {
+                it.title == movie.title
+            }
+            else userToUpdate.ratedMovies.removeIf { it.title == movie.title}
+        }
+
+    }
 }

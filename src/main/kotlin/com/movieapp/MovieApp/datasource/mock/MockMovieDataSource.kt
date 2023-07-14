@@ -19,8 +19,8 @@ class MockMovieDataSource : MovieDataSource {
             "Harry Potter and the Philosopher's Stone",
             "11-22-2001",
             "Chris Columbus",
-            null,
-            0
+            5.0,
+            1
         ),
         Movie(
             "2001: A Space Odyssey",
