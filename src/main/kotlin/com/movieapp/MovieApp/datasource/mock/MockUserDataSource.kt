@@ -45,6 +45,10 @@ class MockUserDataSource : UserDataSource{
         return users
     }
 
+    override fun retrieveUser(userName: String): User {
+        return users.find { it.userName == userName }!!
+    }
+
     override fun createUser(user: User): User? {
         if ( users.all { it.userName != user.userName } ) {
             users.add(user)
@@ -65,8 +69,8 @@ class MockUserDataSource : UserDataSource{
         return userToBeRemoved
     }
 
-    override fun updateUser(userUpdateRequest: UserUpdateRequest) {
-        val userToUpdate = users.find { it.userName == userUpdateRequest.userToken.userName }!!
+    override fun updateUser(userUpdateRequest: UserUpdateRequest): User {
+        val userToUpdate = retrieveUser(userUpdateRequest.userToken.userName)
         val updateFavoriteOrRatedMovies = userUpdateRequest.updateFavoriteMoviesOrRatedMovies
         val movie = userUpdateRequest.movie
         val addOrDelete = userUpdateRequest.addOrDelete
@@ -81,5 +85,6 @@ class MockUserDataSource : UserDataSource{
             else userToUpdate.ratedMovies.removeIf { it.title == movie.title}
         }
 
+        return userToUpdate
     }
 }

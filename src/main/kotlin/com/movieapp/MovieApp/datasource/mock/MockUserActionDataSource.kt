@@ -4,17 +4,26 @@ import com.movieapp.MovieApp.datasource.MovieDataSource
 import com.movieapp.MovieApp.datasource.UserActionDataSource
 import com.movieapp.MovieApp.datasource.UserDataSource
 import com.movieapp.MovieApp.datasource.UserStateDataSource
-import com.movieapp.MovieApp.model.Movie
-import com.movieapp.MovieApp.model.MovieCreateRequest
-import com.movieapp.MovieApp.model.MovieFavoriteRequest
-import com.movieapp.MovieApp.model.MovieRatingRequest
+import com.movieapp.MovieApp.model.*
 import org.springframework.stereotype.Repository
 
 @Repository
 class MockUserActionDataSource(
     val userStateDataSource: UserStateDataSource,
-    val movieDataSource: MovieDataSource
+    val movieDataSource: MovieDataSource,
+    val userDataSource: UserDataSource
 ) : UserActionDataSource {
+
+    override fun favoriteMovie(movieFavoriteRequest: MovieFavoriteRequest): User {
+        val userUpdateRequest = UserUpdateRequest(
+            movieFavoriteRequest.userToken,
+            "favoriteMovies",
+            movieFavoriteRequest.movie,
+            "add"
+        )
+
+        return userDataSource.updateUser(userUpdateRequest)
+    }
 
 
     override fun createMovie(movieCreateRequest: MovieCreateRequest): Movie? {
@@ -41,21 +50,12 @@ class MockUserActionDataSource(
         return movieToBeRated
     }
 
-    override fun favoriteMovie(movieFavoriteRequest: MovieFavoriteRequest): Movie? {
-        var userToUpdate = userStateDataSource.retrieveUserDataSource().retrieveUsers().find { it.userName == movieFavoriteRequest.userToken.userName }
-        if (userToUpdate!!.favoriteMovies.contains(movieFavoriteRequest.movie)) return null
-        else {
-            userToUpdate.favoriteMovies.add(movieFavoriteRequest.movie)
-            return movieFavoriteRequest.movie
-        }
-    }
-
     override fun retrieveMovieDataSource(): MovieDataSource {
         return movieDataSource
     }
 
     override fun retrieveUserDataSource(): UserDataSource {
-        return userStateDataSource.retrieveUserDataSource()
+        return userDataSource
     }
 
     override fun retrieveUserStateDataSource(): UserStateDataSource {

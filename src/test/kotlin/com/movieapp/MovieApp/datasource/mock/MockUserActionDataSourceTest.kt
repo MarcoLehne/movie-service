@@ -8,7 +8,7 @@ import org.springframework.test.annotation.DirtiesContext
 
 class MockUserActionDataSourceTest {
 
-    private val mockUserActionDataSource = MockUserActionDataSource(MockUserStateDataSource(MockUserDataSource()), MockMovieDataSource())
+    private val mockUserActionDataSource = MockUserActionDataSource(MockUserStateDataSource(MockUserDataSource()), MockMovieDataSource(), MockUserDataSource())
     private val mockMovieDataSource = mockUserActionDataSource.retrieveMovieDataSource()
     private val mockUserDataSource = mockUserActionDataSource.retrieveUserDataSource()
 
@@ -113,8 +113,13 @@ class MockUserActionDataSourceTest {
             )
         )
 
-        mockUserActionDataSource.favoriteMovie(movieFavoriteRequest)
-        val updatedUser = mockUserDataSource.retrieveUsers().find { it.userName == movieFavoriteRequest.userToken.userName}
+        println(mockUserDataSource.retrieveUser(movieFavoriteRequest.userToken.userName))
+
+        println(mockUserActionDataSource.favoriteMovie(movieFavoriteRequest))
+
+        println(mockUserDataSource.retrieveUser(movieFavoriteRequest.userToken.userName))
+
+        val updatedUser = mockUserDataSource.retrieveUser(movieFavoriteRequest.userToken.userName)
         Assertions.assertThat(updatedUser!!.favoriteMovies.first()).isEqualTo(movieFavoriteRequest.movie)
     }
 }

@@ -1,10 +1,7 @@
 package com.movieapp.MovieApp.service
 
 import com.movieapp.MovieApp.datasource.UserActionDataSource
-import com.movieapp.MovieApp.model.Movie
-import com.movieapp.MovieApp.model.MovieCreateRequest
-import com.movieapp.MovieApp.model.MovieFavoriteRequest
-import com.movieapp.MovieApp.model.MovieRatingRequest
+import com.movieapp.MovieApp.model.*
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,7 +15,7 @@ class UserActionService(private val dataSource: UserActionDataSource) {
         return dataSource.rateMovie(movieRatingRequest)
     }
 
-    fun favoriteMovie(movieFavoriteRequest: MovieFavoriteRequest): Movie? {
+    fun favoriteMovie(movieFavoriteRequest: MovieFavoriteRequest): User {
         return dataSource.favoriteMovie(movieFavoriteRequest)
     }
 }

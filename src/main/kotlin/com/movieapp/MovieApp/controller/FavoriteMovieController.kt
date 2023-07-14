@@ -2,6 +2,7 @@ package com.movieapp.MovieApp.controller
 
 import com.movieapp.MovieApp.model.Movie
 import com.movieapp.MovieApp.model.MovieFavoriteRequest
+import com.movieapp.MovieApp.model.User
 import com.movieapp.MovieApp.service.UserActionService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,7 +17,7 @@ class FavoriteMovieController(
 ) {
 
     @PostMapping
-    fun favoriteMovie(@RequestBody favoriteMovieRequest: MovieFavoriteRequest): ResponseEntity<Movie?> {
+    fun favoriteMovie(@RequestBody favoriteMovieRequest: MovieFavoriteRequest): ResponseEntity<User> {
 
         val performFavoriteMovie = service.favoriteMovie(favoriteMovieRequest)
 

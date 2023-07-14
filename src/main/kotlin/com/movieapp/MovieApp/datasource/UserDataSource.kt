@@ -6,5 +6,6 @@ interface UserDataSource {
     fun createUser(user: User): User?
     fun deleteUser(userDeleteRequest: UserDeleteRequest): User?
     fun retrieveUsers(): MutableList<User>
-    fun updateUser(userUpdateRequest: UserUpdateRequest)
+    fun retrieveUser(userName: String): User
+    fun updateUser(userUpdateRequest: UserUpdateRequest): User
 }
