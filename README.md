@@ -248,12 +248,19 @@ Request Body:
 Response Body:
 ```json
 {
-    "title": "Raiders of the Lost Ark",
-    "releaseDate": "06-12-81",
-    "director": "Steven Spielberg",
-    "rating": null,
-    "amountOfRatings": 0
-}
+    "userName": "stargazer74",
+    "password": "jju23",
+    "ratedMovies": [],
+    "favoriteMovies": [
+      {
+        "title": "Raiders of the Lost Ark",
+        "releaseDate": "06-12-81",
+        "director": "Steven Spielberg",
+        "rating": null,
+        "amountOfRatings": 0
+      }
+    ]
+  }
 ```
 
 ## Mock Implementation
@@ -269,22 +276,22 @@ Some data is pre-defined in the mock implementation.
     "title": "Raiders of the Lost Ark",
     "releaseDate": "06-12-81",
     "director": "Steven Spielberg",
-    "cast": null,
-    "rating": 0
+    "rating": null,
+    "amountOfRatings": 0
   },
   {
     "title": "Harry Potter and the Philosopher's Stone",
     "releaseDate": "11-22-2001",
     "director": "Chris Columbus",
-    "cast": null,
-    "rating": 0
+    "rating": 5.0,
+    "amountOfRatings": 1
   },
   {
     "title": "2001: A Space Odyssey",
     "releaseDate": "04-02-1968",
     "director": "Stanley Kubrick",
-    "cast": null,
-    "rating": 0
+    "rating": null,
+    "amountOfRatings": 0
   }
 ]
 
@@ -303,8 +310,24 @@ Some data is pre-defined in the mock implementation.
   {
     "userName": "fluffypuff69",
     "password": "wwuwu999",
-    "ratedMovies": [],
-    "favoriteMovies": []
+    "ratedMovies": [
+      {
+        "title": "Harry Potter and the Philosopher's Stone",
+        "releaseDate": "11-22-2001",
+        "director": "Chris Columbus",
+        "rating": 5.0,
+        "amountOfRatings": 1
+      }
+    ],
+    "favoriteMovies": [
+      {
+        "title": "Harry Potter and the Philosopher's Stone",
+        "releaseDate": "11-22-2001",
+        "director": "Chris Columbus",
+        "rating": 5.0,
+        "amountOfRatings": 1
+      }
+    ]
   },
   {
     "userName": "twistingShadow1",
