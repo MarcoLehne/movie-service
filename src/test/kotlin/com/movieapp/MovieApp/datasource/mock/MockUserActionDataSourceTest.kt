@@ -58,13 +58,18 @@ class MockUserActionDataSourceTest {
         val oldMovieEntry = mockMovieDataSource.retrieveMovies().find { it.title == movieRatingRequest.movie.title }
         val oldAmountOfRating = oldMovieEntry?.amountOfRatings
 
+        val oldRatedMoviesSize = mockUserDataSource.retrieveUser(movieRatingRequest.userToken.userName).ratedMovies.size
+
         mockUserActionDataSource.rateMovie(movieRatingRequest)
+
+        val newRatedMoviesSize = mockUserDataSource.retrieveUser(movieRatingRequest.userToken.userName).ratedMovies.size
 
         val newMovieEntry = mockMovieDataSource.retrieveMovies().find { it.title == movieRatingRequest.movie.title }
         val newRating = newMovieEntry?.rating
         val newAmountOfRating = newMovieEntry?.amountOfRatings
 
         Assertions.assertThat(newAmountOfRating).isGreaterThan(oldAmountOfRating)
+        Assertions.assertThat(newRatedMoviesSize).isGreaterThan(oldRatedMoviesSize)
     }
 
     @Test

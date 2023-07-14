@@ -21,7 +21,6 @@ class MockUserActionDataSource(
             movieFavoriteRequest.movie,
             "add"
         )
-
         return userDataSource.updateUser(userUpdateRequest)
     }
 
@@ -47,6 +46,16 @@ class MockUserActionDataSource(
             movieToBeRated.amountOfRatings += 1
             movieToBeRated.rating = (oldMultipliedRating + movieRatingRequest.rating.toDouble()) / movieToBeRated.amountOfRatings
         }
+
+        val userUpdateRequest = UserUpdateRequest(
+            movieRatingRequest.userToken,
+            "ratedMovies",
+            movieToBeRated,
+            "add"
+        )
+
+        userDataSource.updateUser(userUpdateRequest)
+
         return movieToBeRated
     }
 
