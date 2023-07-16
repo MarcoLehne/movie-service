@@ -32,7 +32,7 @@ class RateMovieControllerTest @Autowired constructor(
                 0
             ),
             UserToken(
-                "stargazer72",
+                "stargazer74",
                 "1"
             ),
             rating = 4
@@ -51,7 +51,5 @@ class RateMovieControllerTest @Autowired constructor(
             jsonPath(".rating") { value(4.0) }
             jsonPath(".amountOfRatings") { value(1) }
         }
-
     }
-
 }

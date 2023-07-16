@@ -11,8 +11,6 @@ class MockUserStateDataSource(
     private val userDataSource: UserDataSource
 ): UserStateDataSource {
 
-    private var users = userDataSource.retrieveUsers()
-
     val loggedInUsers = mutableListOf(
         UserToken(
             "stargazer74",
@@ -27,7 +25,7 @@ class MockUserStateDataSource(
     override fun loginUser(userLoginRequest: UserLoginRequest): UserToken? {
 
         val isUserLoggedIn = loggedInUsers.any { it.userName == userLoginRequest.userName }
-        val user = users.find { it.userName == userLoginRequest.userName }
+        val user = userDataSource.retrieveUser(userLoginRequest.userName)
         val isPWCorrect = user?.password == userLoginRequest.password
 
         if ( ! isUserLoggedIn && isPWCorrect  ) {
@@ -42,17 +40,11 @@ class MockUserStateDataSource(
     }
 
     override fun logoutUser(userToken: UserToken): Boolean {
-
         loggedInUsers.remove(userToken)
-
         return true
     }
 
-    override fun verifyUser(userToken: UserToken): Boolean {
-        return loggedInUsers.any { it == userToken }
-    }
+    override fun verifyUser(userToken: UserToken): Boolean = loggedInUsers.any { it == userToken }
 
-    override fun retrieveUserDataSource(): UserDataSource {
-        return userDataSource
-    }
+    override fun retrieveUserDataSource(): UserDataSource = userDataSource
 }
