@@ -7,14 +7,16 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.annotation.DirtiesContext
 
-class MockUserStateDataSourceTest {
+@SpringBootTest
+class MockUserStateDataSourceTest(
+    @Autowired private val passwordEncoder: PasswordEncoder
+) {
 
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
-    private val mockUserStateDataSource = MockUserStateDataSource(MockUserDataSource(passwordEncoder))
+    private val mockUserStateDataSource = MockUserStateDataSource(MockUserDataSource(passwordEncoder), passwordEncoder)
 
     @Test
     @DirtiesContext
