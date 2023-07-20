@@ -303,13 +303,13 @@ Some data is pre-defined in the mock implementation.
 [
   {
     "userName": "stargazer74",
-    "password": "jju23",
+    "password": "gnitset_rof_tlas_dexif32ujj",
     "ratedMovies": [],
     "favoriteMovies": []
   },
   {
     "userName": "fluffypuff69",
-    "password": "wwuwu999",
+    "password": "gnitset_rof_tlas_dexif999uwuww",
     "ratedMovies": [
       {
         "title": "Harry Potter and the Philosopher's Stone",
@@ -331,7 +331,7 @@ Some data is pre-defined in the mock implementation.
   },
   {
     "userName": "twistingShadow1",
-    "password": "555ju5",
+    "password": "gnitset_rof_tlas_dexif5uj555",
     "ratedMovies": [],
     "favoriteMovies": []
   }
