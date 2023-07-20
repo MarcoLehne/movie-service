@@ -4,11 +4,17 @@ import com.movieapp.MovieApp.model.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.annotation.DirtiesContext
 
-class MockUserDataSourceTest {
+@SpringBootTest
+class MockUserDataSourceTest(
+    @Autowired private val passwordEncoder: PasswordEncoder
+) {
 
-    private val mockUserDataSource = MockUserDataSource()
+    private val mockUserDataSource = MockUserDataSource(passwordEncoder)
 
     @Test
     @DirtiesContext

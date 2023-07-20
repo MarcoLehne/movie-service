@@ -2,6 +2,7 @@ package com.movieapp.MovieApp.service
 
 import com.movieapp.MovieApp.datasource.UserDataSource
 import com.movieapp.MovieApp.model.*
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service

@@ -2,21 +2,24 @@ package com.movieapp.MovieApp.datasource.mock
 
 import com.movieapp.MovieApp.datasource.UserDataSource
 import com.movieapp.MovieApp.model.*
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Repository
 
 @Repository
-class MockUserDataSource : UserDataSource{
+class MockUserDataSource(
+    private val passwordEncoder: PasswordEncoder
+) : UserDataSource{
 
     var users = mutableListOf(
         User(
             "stargazer74",
-            "jju23",
+            "gnitset_rof_tlas_dexif32ujj",
             ratedMovies = mutableListOf(),
             favoriteMovies = mutableListOf()
         ),
         User(
             "fluffypuff69",
-            "wwuwu999",
+            "gnitset_rof_tlas_dexif999uwuww",
             ratedMovies = mutableListOf(Movie(
                 "Harry Potter and the Philosopher's Stone",
                 "11-22-2001",
@@ -34,7 +37,7 @@ class MockUserDataSource : UserDataSource{
         ),
         User(
             "twistingShadow1",
-            "555ju5",
+            "gnitset_rof_tlas_dexif5uj555",
             ratedMovies = mutableListOf(),
             favoriteMovies = mutableListOf()
         )
@@ -51,6 +54,7 @@ class MockUserDataSource : UserDataSource{
 
     override fun createUser(user: User): User? {
         if ( users.all { it.userName != user.userName } ) {
+            user.password = passwordEncoder.encode(user.password)
             users.add(user)
             return user
         }
@@ -61,7 +65,7 @@ class MockUserDataSource : UserDataSource{
         val userToBeRemoved =
             users.find {
                            it.userName == userDeleteRequest.userName &&
-                           it.password == userDeleteRequest.password
+                           it.password == passwordEncoder.encode(userDeleteRequest.password)
         }
 
         users.remove(userToBeRemoved)

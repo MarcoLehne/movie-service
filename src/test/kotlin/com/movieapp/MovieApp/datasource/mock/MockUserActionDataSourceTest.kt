@@ -4,11 +4,20 @@ import com.movieapp.MovieApp.model.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.annotation.DirtiesContext
 
 class MockUserActionDataSourceTest {
 
-    private val mockUserActionDataSource = MockUserActionDataSource(MockUserStateDataSource(MockUserDataSource()), MockMovieDataSource(), MockUserDataSource())
+
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
+    private val mockUserActionDataSource = MockUserActionDataSource(
+        MockUserStateDataSource(
+            MockUserDataSource(passwordEncoder)),
+        MockMovieDataSource(),
+        MockUserDataSource(passwordEncoder))
     private val mockMovieDataSource = mockUserActionDataSource.retrieveMovieDataSource()
     private val mockUserDataSource = mockUserActionDataSource.retrieveUserDataSource()
 
